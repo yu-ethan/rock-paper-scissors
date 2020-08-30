@@ -3,80 +3,45 @@
     <head>
         <title>Rock Paper Scissors</title>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
     </head>
-    <body>
-        <script>
-            const CHOICES = ["rock", "paper", "scissors"];
-
-            function computerPlay(){
-                return CHOICES[Math.floor(Math.random()*CHOICES.length)]
-            }
-            function playRound(playerSelection, computerSelection){
-                if(playerSelection == computerSelection){
-                    return "tie";
-                }
-                else if(playerSelection == "rock"){
-                    if(computerSelection == "paper"){
-                        return 'computerWin';
-                    }
-                    else{
-                        return 'playerWin';
-                    }
-                }
-                else if(playerSelection == "paper"){
-                    if(computerSelection == "scissors"){
-                        return 'computerWin';
-                    }
-                    else{
-                        return 'playerWin';
-                    }
-                }
-                else if(playerSelection == "scissors"){
-                    if(computerSelection == "rock"){
-                        return 'computerWin';
-                    }
-                    else{
-                        return 'playerWin';
-                    }
-                }
-                else{
-                    return "Something went terribly wrong.";
-                }
-            }
-            
-            function isValid(playerSelection){
-                while(!CHOICES.includes(playerSelection)){
-                    playerSelection = prompt("Please enter a valid selection. (Rock, Paper or Scissors)").toLowerCase();
-                }
-                return playerSelection;
-            }
-
-
-            function game(){
-                let playerScore = 0;
-                let computerScore  = 0;
-                for(let i = 0; i < 5; ++i){
-                    playerSelection = prompt("Select a move! (Rock, Paper, Scissors)").toLowerCase();
-                    playerSelection = isValid(playerSelection);
-                    computerSelection = computerPlay();
-                    const win = playRound(playerSelection, computerSelection);
-                    let winningMsg;
-                    if(win == 'tie'){
-                        winningMsg = "It's a tie!";
-                    }
-                    else if(win == 'playerWin'){
-                        playerScore++;
-                        winningMsg = `Player wins; ${playerSelection} beats ${computerSelection}.`;
-                    }
-                    else if(win == 'computerWin'){
-                        computerScore++;
-                        winningMsg = `Computer wins; ${computerSelection} beats ${playerSelection}.`;
-                    }
-                    console.log(winningMsg);
-                }
-                console.log(`Player Score: ${playerScore}, Computer Score: ${computerScore}`);
-            }
-            game();
-        </script>
+    <body class='base'>
+        <div id="game-container">
+            <div id="side-boxes">
+                <div id="player-side">
+                    <div id="scores">
+                        <p>Player Score: <span id="player-score"></span></p>
+                    </div>
+                    <span id="selection-text">
+                        Choose a move! Rock, Paper or Scissors.
+                    </span>
+                    <div id="buttons">
+                        <button id="rock" value="rock" class="playerbutton"></button>
+                        <button id="paper" value="paper" class="playerbutton"></button>
+                        <button id="scissors" value="scissors" class="playerbutton"></button>
+                    </div>
+                </div>
+                <div id="center-box">
+                    <h1 id="title-msg"></h1>
+                    <h2>
+                        <strong>Round: </strong>
+                        <span id="round-num"></span>
+                    </h2>
+                    <div id="reset-container">
+                        <button id="reset">Reset</button>
+                    </div>
+                </div>
+                <div id="computer-side">
+                    <p>Computer Score: <span id="computer-score"></span></p>
+                    <div id="computer-move">
+                        <span id="comp-move-text">Computer is choosing a move</span>
+                        <div>
+                            <img id="comp-img" src="https://i.dlpng.com/static/png/6732904_preview.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="script.js" charset="UTF-8"></script>
     </body>
 </html>
